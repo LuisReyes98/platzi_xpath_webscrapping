@@ -215,3 +215,62 @@ es de suma importancia para el navegador.
 iframe Puedo anidar un elemento HTML
 sobre otro elemento.
 
+## Robots.txt: permisos y consideraciones al hacer web scraping
+
+Se define un archivo llamado robots.txt en la raiz de la pagina web, para que la gente que hace web scraping no lo hagan tan extentido y no llegue afectar la experiencia de tus otros usuarios
+
+Ejemplo robots.txt de platzi:
+
+```txt
+User-Agent: *
+Allow: /
+Allow: /conf/*
+Allow: /conf-og/*
+Disallow: /*/*/concepto/*/*/material/
+Disallow: /login/facebook/
+Disallow: /login/twitter/
+Disallow: /*/*/live/
+Disallow: /*/*/%7B%7Burl%20absolute=/
+Disallow: /*/*/add_contribution/
+Disallow: /mi-suscripcion/
+Disallow: /r/
+Disallow: /clases/*/nuevos_materiales/
+Disallow: /kit-ui/
+Disallow: /ui/
+Disallow: /sfotipy/
+Disallow: /streaming/*
+Disallow: /payments/*
+Disallow: /*/add_review/
+Disallow: /*/save/
+Disallow: /adquirir/*
+Disallow: /comentario/
+Disallow: /comment/
+```
+
+esto representa las reglas que los webscrapers deberian seguir al hacer webscraping en esta pagina
+
+el robots.txt tambien es usado por google para saber que segmentos de la pagina web no se muestren
+
+este archivo se define para que se sepa que esta permitido hacer webscraping en tu sitio web para evitar que se toque informacion sensible del sitio web
+
+y como web scraper incumplir este archivo puede resultar en asuntos legales ya que estas incumpliendo las normas de uso del sitio web.
+
+[Directivas para crear el archivo robots.txt](https://developers.google.com/search/docs/advanced/robots/create-robots-txt?hl=es&visit_id=637484788251299808-230564012&rd=1)
+
+## Xpath
+
+XML path language
+
+Les comparto un recurso.
+
+En http://labs.timtom.ch/library-webscraping/extras/xpath-cheatsheet.md.pdf pueden encontrar más información de XPath.
+
+Xpath es para html lo que las expresiones regulares son para un texto
+
+ya que XML y HTML comparten estructua en ambos se puede usar la misma logica para extraer informacion
+
+ejemplo:
+
+```xpath
+//div/span//h1[@class="title"][1]
+```
