@@ -274,3 +274,68 @@ ejemplo:
 ```xpath
 //div/span//h1[@class="title"][1]
 ```
+
+## Tipos de nodos de Xpath
+
+Es una etiqueta HTML y todo su contenido
+
+[Sitio web para practicar web scraping](http://toscrape.com/)
+
+RESUMEN: Tipos de nodos
+
+■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+
+Un nodo es lo mismo que la etiqueta y su contenido.
+Un nodo puede contener a otros nodos.
+En otras palabras Xpath nos permitirá navegar en los diferentes niveles de profundidad
+deseados con el fin extraer información. Para describir los nodos y relaciones con Xpath se usan una
+sintaxis de ejes.
+
+Toscrape es un sandbox para practicar.
+
+## Expresiones en XPATH
+
+usando xpath en Javascript
+
+```javascript
+$x('expresion de xpath')
+
+/**
+ * Ejemplos realizados en la pagina
+ * http://quotes.toscrape.com/
+*/
+
+$x('/') // el documento principal meta, style, html ,script
+
+$x('/html') // el documento html
+
+$x('//') //salto entre nodos
+
+$x('//h1/a/text()') // accediendo el texto del h1
+
+$x('//h1/a/text()').map(x => x.wholeText) // opteniendo el texto en javascript
+
+$x('//span')  // seleccionar todos los elementos span
+
+$x('//span/.')  // '/.' es el nodo actual siendo esto igual a hacer '//span'
+
+$x('//span/..') // accediendo a todos los elementos padres de un span
+
+// accediendo a atributos
+$x('//span/@class') // extrae todo el contenido de todos los elementos class que esten en un elemento span
+```
+
+## Predicados en XPATH
+
+```javascript
+// [] se usa para predicados
+$x('/html/body/div/div[1]') // en este caso se pide que solo traiga el primer elemento
+
+$x('/html/body/div/div[last()]') // se pide el ultimo elemento de la lista
+
+$x('//span[@class]') // solo los span que tenga una clase
+
+$x('//span[@class="text"]') // solo los span que tenga la clase "text"
+
+$x('//span[@class="text"]/text()').map(x => x.wholeText) // extrajendo todas la citas del sitio web
+```
