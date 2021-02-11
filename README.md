@@ -302,7 +302,7 @@ $x('expresion de xpath')
 
 /**
  * Ejemplos realizados en la pagina
- * http://quotes.toscrape.com/
+ * https://quotes.toscrape.com/
 */
 
 $x('/') // el documento principal meta, style, html ,script
@@ -338,4 +338,60 @@ $x('//span[@class]') // solo los span que tenga una clase
 $x('//span[@class="text"]') // solo los span que tenga la clase "text"
 
 $x('//span[@class="text"]/text()').map(x => x.wholeText) // extrajendo todas la citas del sitio web
+```
+
+## Operadores en Xpath
+
+```javascript
+$x('//span[@class!="text"]') // todos los span que tenga una clase distinta de "text"
+
+$x('/html/body/div/div[position()=1]') // trae los elementos en la posicion 1
+
+$x('/html/body/div/div[position()>1]') // trae todos los elementos que se encuentran despues de la posicion 1
+
+$x('//span[@class="text" and @class="tag-item"]') // trae los elementos que tengan como clase a "text" Y a "tag-item"
+
+$x('//span[@class="text" or @class="tag-item"]') // trae los elementos que tengan como clase a "text" O a "tag-item"
+
+$x('//span[not(@class)]') // trae todos los span que NO tengan una clase
+```
+
+## Wildcards en Xpath
+
+```javascript
+$x('/*') // trae todos los nodos que estan dentro del documento
+
+$x('/html/*') // trae todos los nodos que estan inmediatamente despues del html
+
+$x('//*') // trae todos los elementos que se encuentran en el documento
+
+$x('//span[@class="text"]/@*') // trae todos los atributos de todos los span que tengan la clase texto
+
+$x('/html/body//div/@*') // trae todos los atributos de todos los elementos div que estan dentro del body
+
+$x('//span[@class="text" and @itemprop="text"]/*') // en este caso no trae nada ya que adentro solo hay texto plano no hay nodos
+
+$x('//span[@class="text" and @itemprop="text"]/node()') // en todos los span que tengan como atributo class="text" and itemprop="text" trae todo el contenido esto es distinto a usar *, ya que aqui trae el contenido y texto plano de estos elementos a pesar que no estan dentro de un elemento html
+```
+
+## In-text search en Xpath
+
+```javascript
+// traer todos los autores que tienen un nombre que comienza por la letra A
+$x('//small[@class="author" and starts-with(., "A")]/text()')
+// starts-with(., "A")  el "." punto es para referirse al nodo actual , y A es el texto con que se compara que comienze
+
+$x('//small[@class="author" and starts-with(., "A")]/text()').map(x=>x.wholeText) // viendo el texto de los autores que inician con la letra A
+
+// autores que el nombre contenga Ro
+$x('//small[@class="author" and contains(., "Ro")]')
+
+$x('//small[@class="author" and contains(., "Ro")]/text()').map(x=>x.wholeText) // viendo el texto
+
+// autores que terminan en t
+$x('//small[@class="author" and ends-with(., "t")]/text()') // esta función no funcionara en el navegador ya que en los navegadores esta xpath 1.0 y ends-with se agrego en xpath 2.0
+
+// usando expreciones regulares
+$x('//small[@class="author" and matches(., "A.*n")]/text()') // inicia con la letra A y termina con la letra n , tambien de xpath 2.0
+
 ```
