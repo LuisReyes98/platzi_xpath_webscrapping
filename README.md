@@ -395,3 +395,60 @@ $x('//small[@class="author" and ends-with(., "t")]/text()') // esta función no 
 $x('//small[@class="author" and matches(., "A.*n")]/text()') // inicia con la letra A y termina con la letra n , tambien de xpath 2.0
 
 ```
+
+## Xpath Axes
+
+[Cheatsheet](https://devhints.io/xpath)
+
+```javascript
+
+$x('/html/body/div/self::div') // referiendose al mismo nodo div actual
+
+$x('/html/body/div/.') // sugar syntax del ejemplo anterior
+
+$x('/html/body/div/child::div') // trae los hijos del nodo div
+
+
+$x('/html/body/div/descendant::div') // trae todos los descendientes de este nodo
+
+$x('/html/body/div/descendant-or-self::div') //  trae el nodo actual y todos sus descendientes
+```
+
+## Aplicando lo aprendido
+
+```javascript
+// ejemplos de https://books.toscrape.com/index.html
+
+$x('//article[@class="product_pod"]/h3/a/@title') // trayendo todos los titulos de los libros
+
+$x('//article[@class="product_pod"]/h3/a/@title').map(x => x.value)
+
+$x('//article[@class="product_pod"]/div[@class="product_price"]/p[@class="price_color"]/text()') // tdoos los precios de los libros
+
+$x('//article[@class="product_pod"]/div[@class="product_price"]/p[@class="price_color"]/text()').map(x => x.wholeText)
+
+$x('//div[@class="side_categories"]/ul[@class="nav nav-list"]/li/ul/li/a/text()') // todas las categorias de libros
+
+$x('//div[@class="side_categories"]/ul[@class="nav nav-list"]/li/ul/li/a/text()').map(x => x.wholeText.trim())
+
+// RETO
+
+/*
+Extraer descripcion de libros
+
+https://books.toscrape.com/catalogue/sapiens-a-brief-history-of-humankind_996/index.html
+*/
+$x('//article[@class="product_page"]/p[position()=1]/text()')
+
+$x('//article[@class="product_page"]/p[position()=1]/text()')[0].wholeText
+
+
+/*
+Extraer stock de libros
+*/
+
+$x('//table[@class="table table-striped"]/tbody/tr/td/.')[5]
+
+$x('//table[@class="table table-striped"]/tbody/tr[6]/td/text()')[0].wholeText
+
+```
