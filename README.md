@@ -452,3 +452,9 @@ $x('//table[@class="table table-striped"]/tbody/tr/td/.')[5]
 $x('//table[@class="table table-striped"]/tbody/tr[6]/td/text()')[0].wholeText
 
 ```
+
+## Recomendaciones legales
+
+revisar el archivo robots.txt
+
+revisar los permisos y terminos de uso de la pagina a la cual le haras web scrapping
